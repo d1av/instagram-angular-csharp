@@ -1,4 +1,6 @@
 export type RespostaPadraoMsg = {
     msg?:string,
-    error?:string
+    error?:string,
+    email?:string,
+    nome?:string
 }
