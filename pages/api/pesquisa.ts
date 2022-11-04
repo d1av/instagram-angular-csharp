@@ -6,7 +6,7 @@ import { uploadImagemCosmic, upload } from '../../services/uploadImagemCosmic';
 import { PublicacaoModel } from '../../models/PublicacaoModel'
 import { UsuarioModel } from '../../models/UsuarioModel'
 
-const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg|Array<String>>) => {
+const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg | Array<String>>) => {
     try {
         if (req.method === 'GET') {
             const { filtro } = req.query;
@@ -16,7 +16,11 @@ const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<Respos
             }
 
             const usuariosEncontrados = await UsuarioModel.find({
-                nome: {$regex: filtro, $options: 'i'}
+             //ve por nome ou email
+                $or: [
+                    { nome: { $regex: filtro, $options: 'i' } },
+                    { email: { $regex: filtro, $options: 'i' } },
+                ]
             })
             return res.status(200).json(usuariosEncontrados)
 
