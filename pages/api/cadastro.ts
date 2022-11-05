@@ -6,6 +6,7 @@ import { UsuarioModel } from '../../models/UsuarioModel'
 import bcrypt from 'bcrypt';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
 import nc from 'next-connect';
+import { politicaCORS } from '../../middleware/politicaCORS'
 
 const handler = nc().use(upload.single('file'))
     .post(
@@ -63,4 +64,4 @@ export const config = {
 }
 
 
-export default connectMongoDB(handler);
+export default politicaCORS(connectMongoDB(handler));

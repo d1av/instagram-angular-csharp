@@ -6,6 +6,7 @@ import { connectMongoDB } from '../../middleware/connectDB'
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraMsg'
 import { UsuarioModel } from "../../models/UsuarioModel";
 import { LoginResposta } from "../../types/LoginResposta";
+import { politicaCORS } from "../../middleware/politicaCORS";
 
 const endpointLogin = async (
   req: NextApiRequest,
@@ -40,4 +41,4 @@ const endpointLogin = async (
   return res.status(405).json({ error: 'Metodo informado não é valido' });
 }
 
-export default connectMongoDB(endpointLogin);
+export default politicaCORS(connectMongoDB(endpointLogin));

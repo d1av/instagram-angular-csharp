@@ -5,6 +5,7 @@ import { validarTokenJWT } from '../../middleware/validateToken';
 import { uploadImagemCosmic, upload } from '../../services/uploadImagemCosmic';
 import { PublicacaoModel } from '../../models/PublicacaoModel'
 import { UsuarioModel } from '../../models/UsuarioModel'
+import { politicaCORS } from '../../middleware/politicaCORS';
 
 const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg | Array<String>>) => {
     try {
@@ -41,4 +42,4 @@ const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<Respos
     }
 }
 
-export default validarTokenJWT(connectMongoDB(pesquisaEndpoint));
+export default politicaCORS(validarTokenJWT(connectMongoDB(pesquisaEndpoint)));

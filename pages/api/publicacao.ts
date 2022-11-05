@@ -7,6 +7,7 @@ import type { RespostaPadraoMsg } from '../../types/RespostaPadraMsg'
 import { uploadImagemCosmic, upload } from '../../services/uploadImagemCosmic';
 import { PublicacaoModel } from '../../models/PublicacaoModel'
 import { UsuarioModel } from '../../models/UsuarioModel'
+import { politicaCORS } from '../../middleware/politicaCORS';
 
 
 const handler = nc()
@@ -48,9 +49,6 @@ const handler = nc()
             console.log(error)
             res.status(400).json({ error: `Erro na requisição ${error}` });
         }
-
-
-
     });
 
 export const config = {
@@ -59,4 +57,4 @@ export const config = {
     }
 }
 
-export default validarTokenJWT(connectMongoDB(handler));
+export default politicaCORS(validarTokenJWT(connectMongoDB(handler)));
