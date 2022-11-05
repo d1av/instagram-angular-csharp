@@ -13,9 +13,9 @@ const handler = nc()
     .use(upload.single('file'))
     .post(async (req: any, res: NextApiResponse<RespostaPadraoMsg>) => {
         try {
-            const {userId} = req.query;
+            const { userId } = req.query;
             const usuario = await UsuarioModel.findById(userId);
-            if(!usuario){
+            if (!usuario) {
                 return res.status(400).json({ error: 'Usuário não encontrado.' });
             }
 
@@ -27,7 +27,7 @@ const handler = nc()
             if (!descricao || descricao.length < 2) {
                 return res.status(400).json({ error: 'Descrição não é válida.' });
             }
-            if (!req.file|| !req.file.originalname) {
+            if (!req.file || !req.file.originalname) {
                 return res.status(400).json({ error: 'Imagem é obrigatória.' });
             }
 
@@ -39,7 +39,9 @@ const handler = nc()
                 data: new Date()
             }
 
-          await PublicacaoModel.create(publicacao);
+            await PublicacaoModel.create(publicacao);
+            usuario.publicacoes++
+            await UsuarioModel.findByIdAndUpdate({ _id: usuario._id }, usuario)
 
             return res.status(200).json({ msg: 'Publicação criada com sucesso' });
         } catch (error) {
