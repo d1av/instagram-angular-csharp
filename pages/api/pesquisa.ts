@@ -9,6 +9,10 @@ import { politicaCORS } from '../../middleware/politicaCORS';
 
 const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg | Array<String>>) => {
     try {
+        if (req.method == "OPTIONS") {
+            res.setHeader("Allow", "POST,PUT,PATCH,DELETE,OPTIONS,HEAD");
+            return res.status(202).json({});
+        }
         if (req.method === 'GET') {
             if (req?.query?.id) {
                 const usuarioEncontrado = await UsuarioModel.findById(req?.query?.id)

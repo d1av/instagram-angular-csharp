@@ -8,7 +8,7 @@ app.use(Cors());
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
 const cors = Cors({
-    methods: ['POST', 'GET', 'PUT', 'DELETE', 'HEAD'],
+    methods: ['POST', 'GET', 'PUT', 'DELETE', 'HEAD','OPTIONS'],
 })
 
 // Helper method to wait for a middleware to execute before continuing
