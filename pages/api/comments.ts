@@ -31,7 +31,7 @@ const commentEndpoint = async (req: NextApiRequest, res: NextApiResponse) => {
             }
             publicacao.comentarios.push(comentario);
             await PublicacaoModel.findByIdAndUpdate({ _id: publicacao._id }, publicacao)
-            return res.status(200).json({ msg: `Comentário adiciona com sucesso por ${usuarioLogado.nome}`})
+            return res.status(200).json({ msg: `Comentário adiciona com sucesso por ${usuarioLogado.nome}` })
         }
     } catch (error) {
         console.log(error)

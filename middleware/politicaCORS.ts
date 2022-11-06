@@ -1,20 +1,30 @@
-import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
-import type { RespostaPadraoMsg } from '../types/RespostaPadraMsg';
-import NextCors from 'nextjs-cors';
-//import Cors from 'cors';
+import Cors from 'cors'
+import { NextApiRequest,NextApiResponse, NextApiHandler } from 'next'
+
+// Initializing the cors middleware
+const cors = Cors({
+    methods: ['GET','POST','PUT','DELETE', 'HEAD'],
+})
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn:any) {
+    return new Promise((resolve, reject) => {
+        fn(req, res, (result:any) => {
+            if (result instanceof Error) {
+                return reject(result)
+            }
+
+            return resolve(result)
+        })
+    })
+}
 
 export const politicaCORS = (handler: NextApiHandler) =>
-    async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg>) => {
-        try {
-             await NextCors(req, res, {
-                origin: '*',
-                methods: ['GET', 'POST', 'PUT','DELETE'],
-                optionsSuccessStatus: 204, // navegadores antigos dao problema quando se retorna 204
-            }); 
+    async (req: NextApiRequest, res: NextApiResponse) => {
+    // Run the middleware
+    await runMiddleware(req, res, cors)
 
-            return handler(req, res);
-        } catch (e) {
-            console.log('Erro ao tratar a politica de CORS:', e);
-            return res.status(500).json({ error: 'Ocorreu erro ao tratar a politica de CORS' });
-        }
-    }
+    // Rest of the API logic
+    return handler(req,res);
+}

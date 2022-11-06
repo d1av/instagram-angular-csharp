@@ -23,7 +23,7 @@ const likeEndpoint = async (req: NextApiRequest, res: NextApiResponse) => {
             }
 
             //index -1, user didn't like the photo, if > -1 user liked the photo
-            const userIndexOnLike: number = publicacao.likes.findIndex((e:any)=> e === usuario._id);
+            const userIndexOnLike: number = publicacao.likes.findIndex((e: any) => e === usuario._id);
 
             if (userIndexOnLike !== -1) {
                 publicacao.likes.splice(userIndexOnLike, 1);

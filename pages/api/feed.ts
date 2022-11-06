@@ -43,17 +43,19 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPa
                 })
                     .sort({ data: -1 });
 
-                    const result = [];
+                const result = [];
 
-                    for(const publicacao of publicacoes){
-                        const usuarioDaPublicacao = await UsuarioModel.findById(publicacao.idUsuario)
-                        const final = {...publicacao._doc, usuario: {
+                for (const publicacao of publicacoes) {
+                    const usuarioDaPublicacao = await UsuarioModel.findById(publicacao.idUsuario)
+                    const final = {
+                        ...publicacao._doc, usuario: {
                             nome: usuarioDaPublicacao.nome,
                             avatar: usuarioDaPublicacao.avatar
-                        }}
-
-                        result.push(final);
+                        }
                     }
+
+                    result.push(final);
+                }
 
                 return res.status(200).json({ result });
             }

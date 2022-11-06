@@ -29,7 +29,7 @@ const endpointSeguir = async (req: NextApiRequest, res: NextApiResponse) => {
             if (FollowThisUserQuestion && FollowThisUserQuestion.length > 0) {
 
 
-                FollowThisUserQuestion.forEach(async (e:any) => await SeguidorModel.findByIdAndDelete({ _id: e._id }));
+                FollowThisUserQuestion.forEach(async (e: any) => await SeguidorModel.findByIdAndDelete({ _id: e._id }));
 
                 loggedUser.seguindo--;
                 await UsuarioModel.findByIdAndUpdate({ _id: userId }, loggedUser);

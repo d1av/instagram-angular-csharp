@@ -54,7 +54,7 @@ const handler = nc().use(upload.single('file'))
                 avatar: dbSave.avatar
             })
         }
-  );
+    );
 
 
 export const config = {

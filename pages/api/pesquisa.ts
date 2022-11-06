@@ -12,8 +12,8 @@ const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<Respos
         if (req.method === 'GET') {
             if (req?.query?.id) {
                 const usuarioEncontrado = await UsuarioModel.findById(req?.query?.id)
-                if (!usuarioEncontrado){
-                    return res.status(400).json({error: 'Usuario não encontrado.'})
+                if (!usuarioEncontrado) {
+                    return res.status(400).json({ error: 'Usuario não encontrado.' })
                 }
                 usuarioEncontrado.senha = null;
                 return res.status(400).json(usuarioEncontrado)
