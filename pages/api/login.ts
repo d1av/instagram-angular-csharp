@@ -20,6 +20,8 @@ const endpointLogin = async (
 
 
   if (req.method === 'POST') {
+
+    if(!req.body.login||!req.body.senha) return res.status(400).json({error: 'body undefined'})
     const { login, senha } = req.body;
 
     //buscar banco email, e compara senha se existir usuário no banco
