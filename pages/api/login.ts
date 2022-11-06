@@ -49,4 +49,4 @@ export const config = {
   }
 }
 
-export default connectMongoDB(endpointLogin);
+export default politicaCORS(connectMongoDB(endpointLogin));
