@@ -1,15 +1,39 @@
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
 import NextCors from 'nextjs-cors';
 
+
+import Cors from 'cors'
+
+// Initializing the cors middleware
+// You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
+const cors = Cors({
+    methods: ['POST', 'GET', 'HEAD'],
+})
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(
+    req: NextApiRequest,
+    res: NextApiResponse,
+    fn: Function
+) {
+    return new Promise((resolve, reject) => {
+        fn(req, res, (result: any) => {
+            if (result instanceof Error) {
+                return reject(result)
+            }
+
+            return resolve(result)
+        })
+    })
+}
+
+
+
 export const politicaCORS = (handler: NextApiHandler) =>
     async (req: NextApiRequest, res: NextApiResponse) => {
         try {
-            await NextCors(req, res, {
-                origin: '*/*',
-                methods: ['GET', 'POST', 'PUT','DELETE'],
-                optionsSuccessStatus: 200, // navegadores antigos dao problema quando se retorna 204
-            });
-
+            await runMiddleware(req, res, cors)
             return handler(req, res);
         } catch (e) {
             console.log('Erro ao tratar a politica de CORS:', e);
