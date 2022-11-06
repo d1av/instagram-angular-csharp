@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import nc from 'next-connect';
 
 import { connectMongoDB } from '../../middleware/connectDB'
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraMsg'
@@ -8,7 +9,9 @@ import { UsuarioModel } from "../../models/UsuarioModel";
 import { LoginResposta } from "../../types/LoginResposta";
 import { politicaCORS } from "../../middleware/politicaCORS";
 
-const endpointLogin = async (
+
+const loginHandler = nc()
+  .post(async (
   req: NextApiRequest,
   res: NextApiResponse<RespostaPadraoMsg | LoginResposta>
 ) => {
@@ -17,9 +20,6 @@ const endpointLogin = async (
   if (!JWT_KEY) {
     res.status(500).json({ error: 'ENV JWT não informado.' })
   }
-
-
-  if (req.method === 'POST') {
 
     if(!req.body.login||!req.body.senha) return res.status(400).json({error: 'body undefined'})
     const { login, senha } = req.body;
@@ -39,8 +39,7 @@ const endpointLogin = async (
       })
     }
     return res.status(405).json({ error: 'Usuário ou senha não encontrado.' })
-  }
-  return res.status(405).json({ error: 'Metodo informado não é valido' });
-}
+});
 
-export default politicaCORS(connectMongoDB(endpointLogin));
+
+export default politicaCORS(connectMongoDB(loginHandler));
