@@ -1,5 +1,9 @@
 import Cors from 'cors'
 import { NextApiRequest,NextApiResponse, NextApiHandler } from 'next'
+const express = require('express');
+const cors1 = require('cors');
+const app = express();
+app.use(cors1());
 
 // Initializing the cors middleware
 const cors = Cors({
