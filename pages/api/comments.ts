@@ -41,4 +41,5 @@ const commentEndpoint = async (req: NextApiRequest, res: NextApiResponse) => {
 
 }
 
+
 export default politicaCORS(validarTokenJWT(connectMongoDB(commentEndpoint)));
