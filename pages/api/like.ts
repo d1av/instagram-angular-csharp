@@ -13,26 +13,27 @@ const likeEndpoint = async (req: NextApiRequest, res: NextApiResponse) => {
             const { id } = req.query;
             const publicacao = await PublicacaoModel.findById(id);
             if (!publicacao) {
-                res.status(400).json({ error: "Publication not founded." })
+                res.status(400).json({ error: "Publicação não encontrada." })
             }
 
             const { userId } = req?.query;
             const usuario = await UsuarioModel.findById(userId);
             if (!usuario) {
-                return res.status(400).json({ error: "User not found" })
+                return res.status(400).json({ error: "Usuário não encontrado" })
             }
 
             //index -1, user didn't like the photo, if > -1 user liked the photo
-            const userIndexOnLike: number = publicacao.likes.findIndex((e: any) => e === usuario._id);
+            const userIndexOnLike: number = publicacao.likes.findIndex((e: any) => e.toString() === usuario._id.toString());
+
 
             if (userIndexOnLike !== -1) {
                 publicacao.likes.splice(userIndexOnLike, 1);
                 await PublicacaoModel.findByIdAndUpdate({ _id: publicacao._id }, publicacao)
-                return res.status(200).json({ msg: 'Post Disliked' })
+                return res.status(200).json({ msg: 'Post Descurtido' })
             } else {
-                publicacao.likes.push(usuario._id);
-                await PublicacaoModel.findByIdAndUpdate({ _id: publicacao._id }, publicacao);
-                return res.status(200).json({ msg: 'Post liked successfully.' })
+                 publicacao.likes.push(usuario._id);
+                 await PublicacaoModel.findByIdAndUpdate({ _id: publicacao._id }, publicacao); 
+                return res.status(200).json({ msg: 'Postagem Curtida.' })
             }
         }
         return res.status(403).json({ msg: 'Wrong method' });

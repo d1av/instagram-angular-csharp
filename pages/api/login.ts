@@ -10,8 +10,7 @@ import { LoginResposta } from "../../types/LoginResposta";
 import { politicaCORS } from "../../middleware/politicaCORS";
 
 
-const loginHandler = nc()
-  .post(async (
+const loginHandler = nc().post(async (
   req: NextApiRequest,
   res: NextApiResponse<RespostaPadraoMsg | LoginResposta>
 ) => {
