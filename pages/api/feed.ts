@@ -25,13 +25,13 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPa
                 // onde vme informacao
             } else {
                 //feed principal
-                const { id } = req.query;
-                const usuarioLogado = await UsuarioModel.findById(id)
+                const { userId } = req.query;
+                const usuarioLogado = await UsuarioModel.findById(userId)
                 if (!usuarioLogado) {
                     return res.status(403).json({ error: 'Usuário não encontrado.' })
                 }
 
-                const seguidores = await SeguidorModel.find({ usuarioLogadoId: id })
+                const seguidores = await SeguidorModel.find({ usuarioLogadoId: userId })
                 const seguidoresIds = seguidores.map(s => s.usuarioSeguidoId)
 
                 const publicacoes = await PublicacaoModel.find({
