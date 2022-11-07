@@ -2,10 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { connectMongoDB } from '../../middleware/connectDB';
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraMsg'
 import { validarTokenJWT } from '../../middleware/validateToken';
-import { uploadImagemCosmic, upload } from '../../services/uploadImagemCosmic';
-import { PublicacaoModel } from '../../models/PublicacaoModel'
 import { UsuarioModel } from '../../models/UsuarioModel'
 import { politicaCORS } from '../../middleware/politicaCORS';
+import { SeguidorModel } from '../../models/SeguidorModel';
 
 const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg | Array<String>>) => {
     try {
@@ -19,8 +18,29 @@ const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<Respos
                 if (!usuarioEncontrado) {
                     return res.status(400).json({ error: 'Usuario não encontrado.' })
                 }
-                usuarioEncontrado.senha = null;
-                return res.status(200).json(usuarioEncontrado);
+
+                const user = {
+                    senha: null,
+                    segueEsseUsuario: false,
+                    nome: usuarioEncontrado.nome,
+                    email: usuarioEncontrado.email,
+                    _id: usuarioEncontrado._id,
+                    avatar: usuarioEncontrado.avatar,
+                    seguidores: usuarioEncontrado.seguidores,
+                    seguindo: usuarioEncontrado.seguindo,
+                    publicacoes: usuarioEncontrado.publicacoes,
+                } as any
+
+                const segueEsseUsuario = await SeguidorModel.find(
+                    {
+                        usuarioId: req?.query?.userId,
+                        usuarioSeguindoId: usuarioEncontrado._id
+                    })
+                if (segueEsseUsuario && segueEsseUsuario.length > 0) {
+                    user.segueEsseUsuario = true;
+                }
+                return res.status(200).json(user);
+                //return res.status(200).json(usuarioEncontrado);
             } else {
                 const { filtro } = req.query;
 
@@ -32,8 +52,12 @@ const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<Respos
                     //ve por nome ou email
                     $or: [
                         { nome: { $regex: filtro, $options: 'i' } },
-                        { email: { $regex: filtro, $options: 'i' } },
+                        // { email: { $regex: filtro, $options: 'i' } },
                     ]
+                })
+
+                usuariosEncontrados.forEach(userFound => {
+                    userFound.senha = null
                 })
                 return res.status(200).json(usuariosEncontrados)
             }
