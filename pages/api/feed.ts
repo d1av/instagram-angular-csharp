@@ -11,9 +11,9 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPa
     try {
         if (req.method === "GET") {
             // receber uma informacao do id do usuario
-            const { userId } = req.query;
+            const { id } = req.query;
             if (req?.query?.id) {
-                const usuario = await UsuarioModel.findById(userId);
+                const usuario = await UsuarioModel.findById(id);
                 if (!usuario) {
                     return res.status(400).json({ error: 'Usuario não é valido' });
                 }
@@ -25,13 +25,13 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPa
                 // onde vme informacao
             } else {
                 //feed principal
-                const { userId } = req.query;
-                const usuarioLogado = await UsuarioModel.findById(userId)
+                const { id } = req.query;
+                const usuarioLogado = await UsuarioModel.findById(id)
                 if (!usuarioLogado) {
                     return res.status(403).json({ error: 'Usuário não encontrado.' })
                 }
 
-                const seguidores = await SeguidorModel.find({ usuarioLogadoId: userId })
+                const seguidores = await SeguidorModel.find({ usuarioLogadoId: id })
                 const seguidoresIds = seguidores.map(s => s.usuarioSeguidoId)
 
                 const publicacoes = await PublicacaoModel.find({
