@@ -20,7 +20,7 @@ const pesquisaEndpoint = async (req: NextApiRequest, res: NextApiResponse<Respos
                     return res.status(400).json({ error: 'Usuario não encontrado.' })
                 }
                 usuarioEncontrado.senha = null;
-                return res.status(400).json(usuarioEncontrado)
+                return res.status(200).json(usuarioEncontrado);
             } else {
                 const { filtro } = req.query;
 
