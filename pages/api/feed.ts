@@ -17,10 +17,24 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPa
                 if (!usuario) {
                     return res.status(400).json({ error: 'Usuario não é valido' });
                 }
-                const publicacoes = await PublicacaoModel.find({ idUsuario: usuario._id })
+                let publicacoes = await PublicacaoModel.find({ idUsuario: usuario._id })
                     .sort({ data: -1 });
 
-                return res.status(200).json(publicacoes);
+
+                const resposta = publicacoes.map(p=>(
+                    {
+                        _id: p?._id,
+                        idUsuario: p?.idUsuario,
+                        descricao: p?.descricao,
+                        foto: p?.foto,
+                        comentarios: p?.comentarios,
+                        likes: p?.likes,
+                        avatar: usuario?.avatar,
+                        usuarioNome: usuario?.nome
+                    }
+                ))
+
+                return res.status(200).json(resposta);
                 // buscar do feed
                 // onde vme informacao
             } else {
