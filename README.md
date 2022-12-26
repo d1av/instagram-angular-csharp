@@ -2,6 +2,18 @@
 
 Instagram like project done with Angular.
 
+# TEST USER
+
+USER: admin@admin.com
+password: admin
+
+# This site is live!
+
+Angular version: https://instagram-frontend-angular.vercel.app/
+
+Nextjs version: https://insstagram.vercel.app/
+
+
 ## Used Technologies
 
 1. **Angular:** 14.2.9.
