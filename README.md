@@ -5,6 +5,7 @@ Instagram like project done with Angular.
 # TEST USER
 
 USER: admin@admin.com
+
 password: admin
 
 # This site is live!
