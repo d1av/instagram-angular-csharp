@@ -55,7 +55,7 @@ namespace DevagramCSharp.Controllers
                     {
                         Descricao = publicacaodto.Descricao,
                         IdUsuario = usuario.Id,
-                        Foto = cosmicservice.EnviarImagem(new ImagemDto { Imagem = publicacaodto.Foto, Nome = "publicacao" })
+                        //Foto = cosmicservice.EnviarImagem(new ImagemDto { Imagem = publicacaodto.Foto, Nome = "publicacao" })
                     };
                     _publicacaoRepository.Publicar(publicacao);
                 }

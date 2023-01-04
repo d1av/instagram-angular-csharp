@@ -83,11 +83,11 @@ namespace DevagramCSharp.Controllers
                     {
                         CosmicService cosmicservice = new CosmicService();
 
-                        usuario.FotoPerfil = cosmicservice.EnviarImagem(new ImagemDto
-                        {
-                            Imagem = usuariodto.FotoPerfil,
-                            Nome = usuariodto.Nome.Replace(" ", "")
-                        });
+                        //usuario.FotoPerfil = cosmicservice.EnviarImagem(new ImagemDto
+                        //{
+                        //    Imagem = usuariodto.FotoPerfil,
+                        //    Nome = usuariodto.Nome.Replace(" ", "")
+                        //});
 
                         usuario.Nome = usuariodto.Nome;
 
@@ -149,11 +149,11 @@ namespace DevagramCSharp.Controllers
                         Email = usuariodto.Email,
                         Senha = usuariodto.Senha,
                         Nome = usuariodto.Nome,
-                        FotoPerfil = cosmicservice.EnviarImagem(new ImagemDto
-                        {
-                            Imagem = usuariodto.FotoPerfil,
-                            Nome = usuariodto.Nome.Replace(" ", "")
-                        })
+                        //FotoPerfil = cosmicservice.EnviarImagem(new ImagemDto
+                        //{
+                        //    Imagem = usuariodto.FotoPerfil,
+                        //    Nome = usuariodto.Nome.Replace(" ", "")
+                        //})
                     };
 
                     usuario.Senha = Utils.MD5Utils.gerarHashMD5(usuario.Senha);

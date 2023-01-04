@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Machinery\\Desktop\\Git\\DevagramCSharp\\DevagramCSharp\\DevagramCSharp.csproj": {}
+    "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Machinery\\Desktop\\Git\\DevagramCSharp\\DevagramCSharp\\DevagramCSharp.csproj": {
+    "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Machinery\\Desktop\\Git\\DevagramCSharp\\DevagramCSharp\\DevagramCSharp.csproj",
+        "projectUniqueName": "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj",
         "projectName": "DevagramCSharp",
-        "projectPath": "C:\\Users\\Machinery\\Desktop\\Git\\DevagramCSharp\\DevagramCSharp\\DevagramCSharp.csproj",
+        "projectPath": "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj",
         "packagesPath": "C:\\Users\\Machinery\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Machinery\\Desktop\\Git\\DevagramCSharp\\DevagramCSharp\\obj\\",
+        "outputPath": "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Machinery\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -90,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

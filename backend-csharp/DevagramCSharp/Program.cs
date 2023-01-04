@@ -17,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DevagramContext>(option => option.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DevagramContext>(option => option.UseSqlite(connectionString));
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
 builder.Services.AddScoped<ISeguidorRepository, SeguidorRepositoryImpl>();
