@@ -24,16 +24,13 @@ public class Program
         // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<DevagramContext>();
 
-        Console.WriteLine("HOST: " + Environment.GetEnvironmentVariable("HOST") +
+        Console.WriteLine("HOST Connection String: " + Environment.GetEnvironmentVariable("DB_HOST") +
         Environment.GetEnvironmentVariable("DB_USERNAME") +
         Environment.GetEnvironmentVariable("DB_PASSWORD") +
         Environment.GetEnvironmentVariable("DB_DATABASE") +
         Environment.GetEnvironmentVariable("DB_PORT"));
 
-        foreach (var x in Environment.GetEnvironmentVariables())
-        {
-            Console.WriteLine(x);
-        }
+
 
         builder.Services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
         builder.Services.AddScoped<ISeguidorRepository, SeguidorRepositoryImpl>();
@@ -63,11 +60,11 @@ public class Program
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        //if (app.Environment.IsDevelopment())
+        //{
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        //}
 
         app.UseHttpsRedirection();
 
