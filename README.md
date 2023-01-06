@@ -1,6 +1,8 @@
 # Devagram
 
-Instagram like project done with Angular.
+Instagram like project done with Angular, where you can see other users posts, post yourself, like and comment.
+It's possible to alter your user information.
+
 
 # TEST USER
 
@@ -13,6 +15,8 @@ password: admin
 Angular version: https://instagram-frontend-angular.vercel.app/
 
 Nextjs version: https://insstagram.vercel.app/
+
+API Endpoints C#: https://devagram-csharp.herokuapp.com/swagger/index.html
 
 
 ## Used Technologies
