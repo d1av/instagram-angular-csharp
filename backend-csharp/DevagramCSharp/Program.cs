@@ -4,61 +4,79 @@ using DevagramCSharp.Models;
 using DevagramCSharp.Repository;
 using DevagramCSharp.Repository.Impl;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DevagramContext>(option => option.UseSqlite(connectionString));
-
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
-builder.Services.AddScoped<ISeguidorRepository, SeguidorRepositoryImpl>();
-builder.Services.AddScoped<IPublicacaoRepository, PublicacaoRepositoryImpl>();
-builder.Services.AddScoped<IComentarioRepository, ComentarioRepositoryImpl>();
-builder.Services.AddScoped<ICurtidaRepository, CurtidasRepositoryImpl>();
-
-var chaveCriptogragia = Encoding.ASCII.GetBytes(ChaveJWT.ChaveSecreta);
-builder.Services.AddAuthentication(auth =>
+public class Program
 {
-    auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-}).AddJwtBearer(autenticacao =>
-{
-    autenticacao.RequireHttpsMetadata = false;
-    autenticacao.SaveToken = true;
-    autenticacao.TokenValidationParameters = new TokenValidationParameters
+    private static void Main(string[] args)
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(chaveCriptogragia),
-        ValidateIssuer = false,
-        ValidateAudience = false
-    };
-});
+        var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
+        // Add services to the container.
+
+        builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        builder.Services.AddDbContext<DevagramContext>();
+
+        Console.WriteLine("HOST: " + Environment.GetEnvironmentVariable("HOST") +
+        Environment.GetEnvironmentVariable("DB_USERNAME") +
+        Environment.GetEnvironmentVariable("DB_PASSWORD") +
+        Environment.GetEnvironmentVariable("DB_DATABASE") +
+        Environment.GetEnvironmentVariable("DB_PORT"));
+
+        foreach (var x in Environment.GetEnvironmentVariables())
+        {
+            Console.WriteLine(x);
+        }
+
+        builder.Services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
+        builder.Services.AddScoped<ISeguidorRepository, SeguidorRepositoryImpl>();
+        builder.Services.AddScoped<IPublicacaoRepository, PublicacaoRepositoryImpl>();
+        builder.Services.AddScoped<IComentarioRepository, ComentarioRepositoryImpl>();
+        builder.Services.AddScoped<ICurtidaRepository, CurtidasRepositoryImpl>();
+
+        var chaveCriptogragia = Encoding.ASCII.GetBytes(ChaveJWT.ChaveSecreta);
+        builder.Services.AddAuthentication(auth =>
+        {
+            auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+        }).AddJwtBearer(autenticacao =>
+        {
+            autenticacao.RequireHttpsMetadata = false;
+            autenticacao.SaveToken = true;
+            autenticacao.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(chaveCriptogragia),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+        });
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

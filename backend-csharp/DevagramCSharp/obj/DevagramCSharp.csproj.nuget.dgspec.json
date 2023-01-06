@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj": {}
+    "C:\\Users\\Machinery\\Desktop\\instagram-angular-csharp-main\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj": {
+    "C:\\Users\\Machinery\\Desktop\\instagram-angular-csharp-main\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj",
+        "projectUniqueName": "C:\\Users\\Machinery\\Desktop\\instagram-angular-csharp-main\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj",
         "projectName": "DevagramCSharp",
-        "projectPath": "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj",
+        "projectPath": "C:\\Users\\Machinery\\Desktop\\instagram-angular-csharp-main\\backend-csharp\\DevagramCSharp\\DevagramCSharp.csproj",
         "packagesPath": "C:\\Users\\Machinery\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Machinery\\Desktop\\Git\\instagram-angular-csharp\\backend-csharp\\DevagramCSharp\\obj\\",
+        "outputPath": "C:\\Users\\Machinery\\Desktop\\instagram-angular-csharp-main\\backend-csharp\\DevagramCSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Machinery\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,29 +46,39 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.1, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.7, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.7, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "MySql.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
